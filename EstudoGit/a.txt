@@ -4,4 +4,8 @@ linha modificada teste
 Teste vai dar merda
 
 
+<<<<<<< HEAD
 teste merda 2
+=======
+sdhfisgdfysgdfy
+>>>>>>> refs/remotes/origin/main
