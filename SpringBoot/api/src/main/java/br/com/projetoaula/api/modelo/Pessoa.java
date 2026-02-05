@@ -1,20 +1,27 @@
 package br.com.projetoaula.api.modelo;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@JsonPropertyOrder({ "codigo", "nome", "idade" })
 @Entity
 @Table(name = "pessoas")
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int codigo;
     private String nome;
     private int idade;
+
+    public Pessoa(){
+
+    }
 
     public Pessoa(int idade, String nome) {
         this.idade = idade;
