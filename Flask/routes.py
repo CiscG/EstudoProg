@@ -10,3 +10,7 @@ def homepage():
 @app.route("/blog")
 def blog():
    return "Bem vindo ao meu blog"
+
+@app.route("/teste")
+def teste():
+   return render_template("index.html")
