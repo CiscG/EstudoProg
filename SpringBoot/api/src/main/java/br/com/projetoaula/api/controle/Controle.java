@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.projetoaula.api.modelo.Cliente;
 import br.com.projetoaula.api.modelo.Pessoa;
 import br.com.projetoaula.api.repositorio.Repositorio;
+import br.com.projetoaula.api.servico.Servico;
+import jakarta.validation.Valid;
 
 
 
@@ -25,21 +28,24 @@ public class Controle {
 
     @Autowired
     private Repositorio acao;
+    
+    @Autowired
+    private Servico servico;
 
 
     @PostMapping("/api")
-    public Pessoa cadastrar(@RequestBody Pessoa obj){
-        return acao.save(obj);
+    public ResponseEntity<?> cadastrar(@RequestBody Pessoa obj){
+        return servico.cadastrar(obj);
     }
 
     @GetMapping("/api")
-    public List<Pessoa> selecionar(){
-        return acao.findAll();
+    public ResponseEntity<?> selecionar(){
+        return servico.selecionar();
     }
 
     @GetMapping("/api/{codigo}")
-    public Pessoa selecionarPeloCodigo(@PathVariable int codigo){
-        return acao.findByCodigo(codigo);
+    public ResponseEntity<?> selecionarPeloCodigo(@PathVariable int codigo){
+        return servico.selecionarPeloCodigo(codigo);
     }
 
     @GetMapping("/api/contador")
@@ -49,15 +55,14 @@ public class Controle {
 
 
     @PutMapping("/api")
-    public Pessoa editar(@RequestBody Pessoa obj){
-        return acao.save(obj);
+    public ResponseEntity<?> editar(@RequestBody Pessoa obj){
+        return servico.editar(obj);
     }
 
-    @DeleteMapping("/api/{codigo}")
-    public void remover(@PathVariable int codigo){
-        Pessoa obj = selecionarPeloCodigo(codigo);
 
-        acao.delete(obj);
+    @DeleteMapping("/api/{codigo}")
+    public ResponseEntity<?> remover(@PathVariable int codigo){
+       return servico.remover(codigo);
     }
 
     @GetMapping("/api/ordenarNomes")
@@ -125,5 +130,11 @@ public class Controle {
     @GetMapping("/status")
     public ResponseEntity<?> status(){
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/cliente")
+    public void cliente(@Valid @RequestBody Cliente obj){
+        
+
     }
 }
